@@ -14,3 +14,6 @@ A couple of points to note:
 
 3. You must modify the files to suit your needs. As mentioned earlier, this is a very rudimentary R script. 
 
+Basic script used:
+
+./gwas-pw -i "yourinputfilename" -phenos "pheno1name" "pheno2name" -o "outputfilename" 
