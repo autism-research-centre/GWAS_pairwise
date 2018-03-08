@@ -16,4 +16,7 @@ A couple of points to note:
 
 Basic script used:
 
+```bash
 ./gwas-pw -i "yourinputfilename" -phenos "pheno1name" "pheno2name" -o "outputfilename" 
+
+```
