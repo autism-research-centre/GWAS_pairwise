@@ -12,29 +12,18 @@ gwas2 = fread("")
 
 merged = merge(gwas1, gwas2, by = "SNP")
 
-merged$true1 = merged$effect_allele == merged$A1
+#generate Z stats. 
 
-merged$true2 = merged$effect_allele == merged$A2
+merged$Z.x = ifelse(merged$A1.x == merged$A1.y, merged$Z.x, -1*merged$Z.x)
 
-merged1 = subset(merged, true1 == "TRUE")
-merged2 = subset(merged, true2 == "TRUE")
+setnames(merged, "SNP", "SNPID")
+setnames(merged, "BP", "POS")
+setnames(merged, "Z.x", "Z_GWAS1")
+setnames(merged, "Z.y", "Z_GWAS2")
+setnames(merged, "SE.x", "V_GWAS1")
+setnames(merged, "SE.y", "V_GWAS2")
 
-merged2$Z.y = -1*merged2$Z.y
-merged3 = rbind(merged1, merged2)
-
-setnames(merged3, "SNP", "SNPID")
-setnames(merged3, "BP", "POS")
-setnames(merged3, "Z.x", "Z_GWAS1")
-setnames(merged3, "Z.y", "Z_GWAS2")
-setnames(merged3, "SE.x", "V_GWAS1")
-setnames(merged3, "SE.y", "V_GWAS2")
-
-merged3$CHR2 = paste0("chr", merged3$CHR)
-
-merged4 = merged3[,c("SNPID", "CHR2", "POS", "Z_empathy", "V_empathy", "Z_scz", "V_scz")]
-
-merged = merged4
-
+merged$CHR = paste0("chr", merged3$CHR)
 
 chr = subset(merged, CHR == "chr1")
 attach(chr)
@@ -203,5 +192,6 @@ detach(chr)
 data = rbind(data, chr)
 
 data = unique(data)
+data2 = data[!duplicated(data[,c("SNPID")])]
 
-write.table(data, file = "filename.txt", row.names = F, col.names  = T, quote = F)
+write.table(data2, file = "filename.txt", row.names = F, col.names  = T, quote = F)
