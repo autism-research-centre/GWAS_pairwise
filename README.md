@@ -12,11 +12,14 @@ A couple of points to note:
 
 2. The files must be ordered based on basepair position by chromosome
 
-3. You must modify the files to suit your needs. As mentioned earlier, this is a very rudimentary R script. 
+3. You must modify the files to suit your needs. As mentioned earlier, this is a very rudimentary R script.
+
+4. The pos limits have been set keeping in mind the bed file used to generate approximate LD blocks. **Ensure the genome build for the GWAS is same as the bed file. The genome build is hg19 (same as 1000 Genomes phase 1)**
+
+5. LD blocks can be downloaded from here:https://bitbucket.org/nygcresearch/ldetect-data (european sample)
 
 Basic script used:
 
 ```bash
-./gwas-pw -i "yourinputfilename" -phenos "pheno1name" "pheno2name" -o "outputfilename" 
-
+./gwas-pw -i "yourinputfilename" -phenos "pheno1name" "pheno2name" -o "outputfilename" -cor "include_correlation_under_null_if_available" -bed fourier_ls-all.bed
 ```
